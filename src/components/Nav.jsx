@@ -158,17 +158,19 @@ const Nav = () => {
     //
     <nav className="bg-background w-full px-6 py-4 lg:p-12 lg:py-4 fixed z-40">
       <div className="items-center max-w-screen-xl mx-auto md:flex">
-        <div className="flex items-center justify-between py-3  md:block">
-          <a href="/" className="flex space-x-3">
+        <div className="flex items-center justify-between py-3 md:block">
+          <a href="/" className="flex space-x-3 items-center">
             <FaUniversity size={34} />
-            <h1 className="text-3xl font-bold">BBMCH</h1>
+            <h1 className="md:text-2xl font-semibold hover:text-primary duration-200">
+              BBMCH
+            </h1>
           </a>
           <div className="md:hidden">
             <button
               className="text-gray-700 outline-none p-2 rounded-md focus:border-gray-400 focus:border"
               onClick={() => setState(!state)}
             >
-              <HiMenuAlt2 size={30} color="#000" />
+              <HiMenuAlt2 size={30} color="#ccc" />
             </button>
           </div>
         </div>
@@ -291,7 +293,7 @@ const Nav = () => {
             </DropdownMenu>
           ) : (
             <Link to="/login">
-              <Button>Sign In</Button>
+              <Button className="text-gray-700">Sign In</Button>
             </Link>
           )}
         </div>

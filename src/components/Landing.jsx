@@ -18,6 +18,16 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
 
 import { IoSpeedometerOutline } from "react-icons/io5";
 import { LuWarehouse } from "react-icons/lu";
@@ -28,7 +38,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const Landing = () => {
-  const {currentUser} = useSelector(state => state.user)
+  const { currentUser } = useSelector((state) => state.user);
   const appFeatures = [
     {
       title: "Site Speed",
@@ -63,64 +73,100 @@ const Landing = () => {
     },
   ];
 
-const testimonials = [
-  {
-    quote: "Transformative Learning Experience!",
-    description:
-      "LMS turned my courses into interactive journeys. Quick, easy, and impactful.",
-    name: "Jessica W.",
-  },
-  {
-    quote: "Empowerment in Every Course!",
-    description:
-      "LMS empowers educators to create and sell courses effortlessly. A game-changer!",
-    name: "Michael S.",
-  },
-  {
-    quote: "Unlocking Education's Potential!",
-    description:
-      "LMS provides the key to unlocking new heights in online education. Exceptional!",
-    name: "Emily K.",
-  },
-  {
-    quote: "Seamless, Scalable, Successful!",
-    description:
-      "LMS makes launching, scaling, and succeeding in online teaching a seamless journey.",
-    name: "Alex T.",
-  },
-];
-
-
+  const testimonials = [
+    {
+      quote: "Transformative Learning Experience!",
+      description:
+        "LMS turned my courses into interactive journeys. Quick, easy, and impactful.",
+      name: "Jessica W.",
+    },
+    {
+      quote: "Empowerment in Every Course!",
+      description:
+        "LMS empowers educators to create and sell courses effortlessly. A game-changer!",
+      name: "Michael S.",
+    },
+    {
+      quote: "Unlocking Education's Potential!",
+      description:
+        "LMS provides the key to unlocking new heights in online education. Exceptional!",
+      name: "Emily K.",
+    },
+    {
+      quote: "Seamless, Scalable, Successful!",
+      description:
+        "LMS makes launching, scaling, and succeeding in online teaching a seamless journey.",
+      name: "Alex T.",
+    },
+  ];
 
   return (
-    <div className="px-12 py-8">
-      {/* hero section */}
-      <div className="h-screen md:flex justify-between mt-24">
-        <div className="md:w-1/3 space-y-4 mx-4">
-          <p className="leading-snug text-3xl font-extrabold tracking-tight lg:text-5xl lg:leading-normal">
-            Empower Educators, Inspire Learners with LMS
-          </p>
-          <p
-            className="leading-7 [&:not(:first-child)]:mt-6 text-justify"
-            data-aos="fade-down"
-            data-aos-delay="1200"
-          >
-            Discover the future of education with our Learning Management System
-            (LMS). Unleash your teaching potential by creating your own course
-            selling platform effortlessly. Elevate your impact, inspire
-            learners, and thrive in the world of online education with LMS.
-          </p>
-          <Link to={currentUser ? "/app/dashboard" : "/login"}>
-            <Button className="mt-4">Get Started</Button>
-          </Link>
+    <div className="px-4 md:px-12 py-2 md:py-8 overflow-hidden">
+      <div className="relative h-screen flex items-center justify-center">
+        <div className="mt-4 rounded-lg" data-aos="zoom-out">
+          <img
+            src={HeroImage}
+            alt=""
+            className="w-full rounded-lg opacity-60"
+          />
         </div>
-        <div className="md:w-2/3 mt-4 rounded-lg">
-          <img src={HeroImage} alt="" className="w-full rounded-lg" />
+        <div className="absolute text-white text-center">
+          <button className="text-xl hover:text-primary hover:scale-105 md:text-5xl font-bold w-2/3 mx-auto md:leading-normal mb-2 sm:mb-4 duration-200">
+            Bhima Bhoi Medical College and Hospital
+          </button>
+          <p className="text-lg">Balangir, Odisha</p>
+          <Drawer>
+            <DrawerTrigger>
+              <Button className="mt-8 text-gray-700 font-semibold hover:scale-105">
+                Read More
+              </Button>
+            </DrawerTrigger>
+            <DrawerContent className="p-8">
+              <div className="bg-gray-900 text-white flex items-center justify-center mt-8">
+                <div className="max-w-3/4 text-center" data-aos="zoom-in-left">
+                  <h2 className="text-lg md:text-xl lg:text-2xl font-bold mb-4">
+                    Who We Are?
+                  </h2>
+                  <p className="mb-8">
+                    Since our inception, we have always encouraged new ideas and
+                    new talents. Proudly, our association has come a long way
+                    since then. Our team is made up of smart and talented
+                    individuals passionate about creating outstanding results.
+                  </p>
+
+                  <h3 className="md:text-lg lg:text-xl font-bold mb-4">
+                    Our Story
+                  </h3>
+                  <p className="mb-8">
+                    We are UG’s of BBMCH, and this year marks our final year in
+                    MedSchool. As the third batch of this college, we are
+                    grateful that our association will witness the first batch
+                    of graduates from this esteemed institution.
+                  </p>
+
+                  <h3 className="md:text-lg lg:text-xl font-bold mb-4">
+                    Meet Our Hive
+                  </h3>
+                  <p className=" mb-8">
+                    This is not just the story of our batch but of the entire
+                    college, with each member contributing significantly to
+                    different societies headed by secretaries. We are here to
+                    realize the power, potential, and value of every single
+                    member. We believe in working together, being positive, and
+                    inspiring each other. Our success is collective, and our
+                    team includes a board of executives and a long list of
+                    general body members who have always been integral to the
+                    association.
+                  </p>
+                </div>
+              </div>
+            </DrawerContent>
+          </Drawer>
         </div>
       </div>
 
       {/* features */}
-      <div className="h-screen">
+      <div className="h-screen mt-16">
         <h2 className="pb-2 text-3xl font-semibold tracking-tight md:w-2/3 mx-auto text-center">
           Whether you are a startup or an established business, here is why LMS
           is your best choice

@@ -13,6 +13,7 @@ export default {
   theme: {
     fontFamily: {
       Poppins: "Poppins",
+      Agustina: "Agustina",
     },
     container: {
       center: true,

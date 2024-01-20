@@ -9,6 +9,11 @@ body {
   @apply font-Poppins text-text;
 }
 
+@font-face {
+  font-family: Agustina;
+  src: url("assets/fonts/Agustina.otf") format("opentype");
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
