@@ -34,42 +34,68 @@ import { LuWarehouse } from "react-icons/lu";
 import { MdOutlineShoppingCartCheckout } from "react-icons/md";
 import { MdOutlineGroups } from "react-icons/md";
 import { TbBrandGoogleAnalytics } from "react-icons/tb";
+import { IoBookOutline } from "react-icons/io5";
+import { IoPeopleOutline } from "react-icons/io5";
+import { FaRegFileAudio } from "react-icons/fa";
+import { MdOutlineSportsCricket } from "react-icons/md";
+import { LuProjector } from "react-icons/lu";
+import { BiPaint } from "react-icons/bi";
+import { FaRegBuilding } from "react-icons/fa";
+
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const Landing = () => {
   const { currentUser } = useSelector((state) => state.user);
-  const appFeatures = [
-    {
-      title: "Site Speed",
-      description:
-        "Deliver lightning-fast experiences for your users. Witness the incredible speed of your app in action as you start your online journey.",
-      icon: IoSpeedometerOutline,
-    },
 
+  const societies = [
     {
-      title: "Multi-Warehouse",
+      title: "Literary Society",
       description:
-        "Operate seamlessly with one central hub and multiple locations. Ship your products efficiently from various warehouses across the region.",
-      icon: LuWarehouse,
+        "Explore the world of literature and storytelling with our Literary Society. Join us to ignite your passion for reading, writing, and engaging literary discussions.",
+      icon: IoBookOutline,
     },
     {
-      title: "Optimized Checkouts",
+      title: "Cultural Society",
       description:
-        "Provide a smooth shopping experience with optimized checkouts. Reduce abandonment rates and ensure a hassle-free transaction process for your users.",
-      icon: MdOutlineShoppingCartCheckout,
+        "Experience the richness of diverse cultures through our Cultural Society. Join us in celebrating traditions, organizing events, and fostering cultural exchange within our university community.",
+      icon: IoPeopleOutline,
     },
     {
-      title: "Staff Accounts",
+      title: "Audio-Visual Society",
       description:
-        "Expand your team effortlessly by adding employees, colleagues, and teammates. Manage access levels to help your business grow collaboratively.",
-      icon: MdOutlineGroups,
+        "Immerse yourself in the world of audio-visual arts with our society. Join us in creating and appreciating captivating visual content, from films to multimedia presentations.",
+      icon: FaRegFileAudio,
     },
     {
-      title: "Advanced Analytics",
+      title: "Athletic Society",
       description:
-        "Access valuable insights with ease. Get comprehensive information about your app's sales, traffic, regional performance, and product analytics at your fingertips.",
-      icon: TbBrandGoogleAnalytics,
+        "Stay active and fit with our Athletic Society. Join us for sports events, fitness challenges, and a community that promotes a healthy and active lifestyle.",
+      icon: MdOutlineSportsCricket,
+    },
+    {
+      title: "Dramatic Society",
+      description:
+        "Unleash your creativity on the stage with our Dramatic Society. Join us in exploring the world of drama, acting, and theatrical productions within our university community.",
+      icon: LuProjector,
+    },
+    {
+      title: "Fine-Arts Society",
+      description:
+        "Discover the artist within you with our Fine-Arts Society. Join us in expressing creativity through various art forms, from painting to sculpture, and be part of an inspiring community.",
+      icon: BiPaint,
+    },
+    {
+      title: "Social Service Guild",
+      description:
+        "Make a positive impact on society with our Social Service Guild. Join us in organizing and participating in social initiatives, contributing to the well-being of the community around us.",
+      icon: IoPeopleOutline,
+    },
+    {
+      title: "Hostel and Welfare",
+      description:
+        "Enhance the hostel experience and promote student welfare with our society. Join us in creating a supportive and inclusive environment within the university's hostel community.",
+      icon: FaRegBuilding,
     },
   ];
 
@@ -165,38 +191,18 @@ const Landing = () => {
         </div>
       </div>
 
-      {/* features */}
-      <div className="h-screen mt-16">
-        <h2 className="pb-2 text-3xl font-semibold tracking-tight md:w-2/3 mx-auto text-center">
-          Whether you are a startup or an established business, here is why LMS
-          is your best choice
-        </h2>
-        <div className="md:flex justify-between mt-8">
-          <div className="md:w-1/2">
-            <img src={FeatureImage1} alt="" className="w-full" />
-          </div>
-          <div className="md:w-1/2 space-y-4 ">
-            <ul className="list-disc [&>li]:mt-2 font-semibold w-fit mx-auto mt-8">
-              <li>Rapid Launch</li>
-              <li>Effortless Scaling</li>
-              <li>Intuitive Tools for Educators</li>
-              <li>Robust E-Commerce Integration</li>
-              <li>Community Building Support</li>
-            </ul>
-          </div>
-        </div>
-      </div>
 
       {/* features preview */}
-      <div className="">
+      <div className="mt-24">
         <h2 className="pb-2 text-3xl font-semibold tracking-tight md:w-2/3 mx-auto text-center">
-          Education Simplified, Success Amplified.
+          ABOUT THE SOCIETIES
         </h2>
         <p className="pb-2 md:text-xl font-semibold tracking-tight md:w-2/3 mx-auto text-center">
-          Empowering your online business growth with all the essential tools
+          The whole association had been divided into 8 societies headed by
+          secretaries of different disciplines. The societies are as follows:
         </p>
         <div className="md:flex flex-wrap justify-around mb-16">
-          {appFeatures.map((item) => {
+          {societies.map((item) => {
             return (
               <Card
                 key={item.title}
@@ -212,45 +218,6 @@ const Landing = () => {
               </Card>
             );
           })}
-        </div>
-      </div>
-
-      {/* theme preview with custom names */}
-      <div className="">
-        <h2 className="pb-2 text-3xl font-semibold tracking-tight md:w-2/3 mx-auto text-center">
-          Transform your online academy instantly with our captivating themes.
-        </h2>
-        <div className="md:flex flex-wrap justify-around mb-16">
-          {[1, 2, 3, 4, 5, 6].map((item) => {
-            return (
-              <div key={item} className="mx-8 my-8">
-                <div className="w-80 h-96 bg-gray-400 rounded-lg hover:scale-105 duration-200"></div>
-                <p className="leading-7 [&:not(:first-child)]:mt-6 text-justify">
-                  {`Name ${item}`}
-                </p>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* tools */}
-      <div className="h-screen">
-        <h2 className="pb-2 text-3xl font-semibold tracking-tight md:w-2/3 mx-auto text-center">
-          Enhance the functionality for your site with tools
-        </h2>
-        <div className="md:flex justify-between mt-8">
-          <div className="md:w-1/2">
-            <img src={ToolImage} alt="" className="w-full" />
-          </div>
-          <div className="md:w-1/2 space-y-4 ">
-            <ul className="list-disc [&>li]:mt-2 font-semibold w-fit mx-auto mt-8">
-              <li>Hosting</li>
-              <li>Google Analytics</li>
-              <li>Payment Gateway</li>
-              <li>MailChimp</li>
-            </ul>
-          </div>
         </div>
       </div>
 
