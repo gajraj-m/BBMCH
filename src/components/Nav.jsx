@@ -23,7 +23,7 @@ import { HiMenuAlt2 } from "react-icons/hi";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { signOut } from "../redux/slices/userSlice";
-import Logo from '../../public/assets/logo.png'
+import Logo from "../../public/assets/logo.png";
 
 const events = [
   {
@@ -115,6 +115,7 @@ const ListItem = ({ title, desc, href }) => {
 const Nav = () => {
   const [state, setState] = useState(false);
   const { currentUser } = useSelector((state) => state.user);
+  console.log(currentUser)
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -230,9 +231,13 @@ const Nav = () => {
           {currentUser ? (
             <DropdownMenu>
               <DropdownMenuTrigger>
-                <div className="w-10 h-10 rounded-full">
+                <div className="w-8 h-8 rounded-full">
                   <img
-                    src={currentUser.profilePicture}
+                    src={
+                      currentUser.profilePicture
+                        ? currentUser.profilePicture
+                        : "https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-538.jpg"
+                    }
                     alt=""
                     className="rounded-full"
                   />

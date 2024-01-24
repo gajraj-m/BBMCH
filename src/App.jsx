@@ -17,6 +17,7 @@ import Dramatic from "./pages/societies/Dramatic";
 import FineArts from "./pages/societies/FineArts";
 import SocialService from "./pages/societies/SocialService";
 import Hostel from "./pages/societies/Hostel";
+import Footer from "./components/Footer";
 
 function App() {
 
@@ -54,6 +55,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
         </Route>
       </Routes>
+      <Footer/>
     </BrowserRouter>
   );
 }

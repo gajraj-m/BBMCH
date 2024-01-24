@@ -1,15 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signOut,
-  sendPasswordResetEmail,
-  updateEmail,
-  updatePassword,
-  onAuthStateChanged,
-  fetchSignInMethodsForEmail,
-} from "firebase/auth";
-import { auth } from "../../config/config";
 
 const initialState = {
   currentPage: 0,

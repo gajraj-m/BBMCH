@@ -271,9 +271,6 @@ const Landing = () => {
           <CarouselNext />
         </Carousel>
       </div>
-
-      {/* footer */}
-      <div className="bg-black">Footer</div>
     </div>
   );
 };

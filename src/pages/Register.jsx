@@ -4,6 +4,12 @@ import { axiosInstance } from "../config/axios";
 import { FcGoogle } from "react-icons/fc";
 import { Button } from "../components/ui/button";
 import { CONST } from "../config";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
+import { auth } from "../config/firebase";
 
 export default function Register() {
   const [formData, setFormData] = useState({});
@@ -19,12 +25,21 @@ export default function Register() {
     try {
       setLoading(true);
       setError(false);
-      const res = await axiosInstance.post(CONST.uri.auth.REGISTER, formData);
-      setLoading(false);
-      if (res.status !== 200) {
-        setError(true);
-        return;
-      }
+      const {fullname, email, password} = formData
+      console.log(formData)
+       createUserWithEmailAndPassword(auth, email, password)
+         .then((authUser) => {
+          console.log(authUser.user)
+          
+           signInWithEmailAndPassword(auth, email, password).then(
+             updateProfile(auth.currentUser, {
+               displayName: fullname,
+             })
+           );
+         })
+         .catch((err) => {
+           alert(err);
+         });
       navigate("/login");
     } catch (error) {
       setLoading(false);
