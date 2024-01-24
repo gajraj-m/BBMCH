@@ -7,16 +7,16 @@ import Profile from "./pages/Profile";
 import PrivateRoute from "./components/PrivateRoute";
 import AuthRoute from "./components/AuthRoute";
 import { useSelector } from "react-redux";
-import Dashboard from "./pages/app/Dashboard";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Orders from "./pages/app/Orders";
-import Courses from "./pages/app/Courses";
-import Analytics from "./pages/app/Analytics";
-import Audience from "./pages/app/Audience";
-import Plugins from "./pages/app/Plugins";
-import Settings from "./pages/app/Settings";
-import Appearance from "./pages/app/Appearance";
+import Literary from './pages/societies/Literary'
+import Cultural from './pages/societies/Cultural'
+import AudioVisual from "./pages/societies/AudioVisual";
+import Athletic from "./pages/societies/Athletic";
+import Dramatic from "./pages/societies/Dramatic";
+import FineArts from "./pages/societies/FineArts";
+import SocialService from "./pages/societies/SocialService";
+import Hostel from "./pages/societies/Hostel";
 
 function App() {
 
@@ -34,6 +34,17 @@ function App() {
       {/* <Nav /> */}
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/societies">
+          <Route path="literary" element={<Literary />} />
+          <Route path="cultural" element={<Cultural />} />
+          <Route path="audio-visual" element={<AudioVisual />} />
+          <Route path="athletic" element={<Athletic />} />
+          <Route path="dramatic" element={<Dramatic />} />
+          <Route path="fine-arts" element={<FineArts />} />
+          <Route path="social-service" element={<SocialService />} />
+          <Route path="hostel-welfare" element={<Hostel />} />
+        </Route>
+
         <Route element={<AuthRoute />}>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
@@ -41,16 +52,6 @@ function App() {
 
         <Route element={<PrivateRoute />}>
           <Route path="/profile" element={<Profile />} />
-          <Route path="/app">
-            <Route path="dashboard" element={<Dashboard />} />
-            <Route path="orders" element={<Orders />} />
-            <Route path="courses" element={<Courses />} />
-            <Route path="analytics" element={<Analytics />} />
-            <Route path="audience" element={<Audience />} />
-            <Route path="appearance" element={<Appearance />} />
-            <Route path="plugins" element={<Plugins />} />
-            <Route path="settings" element={<Settings />} />
-          </Route>
         </Route>
       </Routes>
     </BrowserRouter>

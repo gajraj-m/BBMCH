@@ -47,6 +47,7 @@ import { useSelector } from "react-redux";
 
 const Landing = () => {
   const { currentUser } = useSelector((state) => state.user);
+  const navigate = useNavigate();
 
   const societies = [
     {
@@ -54,50 +55,59 @@ const Landing = () => {
       description:
         "Explore the world of literature and storytelling with our Literary Society. Join us to ignite your passion for reading, writing, and engaging literary discussions.",
       icon: IoBookOutline,
+      link: "/societies/literary", // Derived from the title
     },
     {
       title: "Cultural Society",
       description:
         "Experience the richness of diverse cultures through our Cultural Society. Join us in celebrating traditions, organizing events, and fostering cultural exchange within our university community.",
       icon: IoPeopleOutline,
+      link: "/societies/cultural", // Derived from the title
     },
     {
       title: "Audio-Visual Society",
       description:
         "Immerse yourself in the world of audio-visual arts with our society. Join us in creating and appreciating captivating visual content, from films to multimedia presentations.",
       icon: FaRegFileAudio,
+      link: "/societies/audio-visual", // Derived from the title
     },
     {
       title: "Athletic Society",
       description:
         "Stay active and fit with our Athletic Society. Join us for sports events, fitness challenges, and a community that promotes a healthy and active lifestyle.",
       icon: MdOutlineSportsCricket,
+      link: "/societies/athletic", // Derived from the title
     },
     {
       title: "Dramatic Society",
       description:
         "Unleash your creativity on the stage with our Dramatic Society. Join us in exploring the world of drama, acting, and theatrical productions within our university community.",
       icon: LuProjector,
+      link: "/societies/dramatic", // Derived from the title
     },
     {
       title: "Fine-Arts Society",
       description:
         "Discover the artist within you with our Fine-Arts Society. Join us in expressing creativity through various art forms, from painting to sculpture, and be part of an inspiring community.",
       icon: BiPaint,
+      link: "/societies/fine-arts", // Derived from the title
     },
     {
       title: "Social Service Guild",
       description:
         "Make a positive impact on society with our Social Service Guild. Join us in organizing and participating in social initiatives, contributing to the well-being of the community around us.",
       icon: IoPeopleOutline,
+      link: "/societies/social-service", // Derived from the title
     },
     {
       title: "Hostel and Welfare",
       description:
         "Enhance the hostel experience and promote student welfare with our society. Join us in creating a supportive and inclusive environment within the university's hostel community.",
       icon: FaRegBuilding,
+      link: "/societies/hostel-welfare", // Derived from the title
     },
   ];
+
 
   const testimonials = [
     {
@@ -127,7 +137,7 @@ const Landing = () => {
   ];
 
   return (
-    <div className="px-4 md:px-12 py-2 md:py-8 overflow-hidden">
+    <div className=" overflow-hidden">
       <div className="relative h-screen flex items-center justify-center">
         <div className="mt-4 rounded-lg" data-aos="zoom-out">
           <img
@@ -137,11 +147,11 @@ const Landing = () => {
           />
         </div>
         <div className="absolute text-white text-center">
-          <button className="text-xl hover:text-primary hover:scale-105 md:text-5xl font-bold w-2/3 mx-auto md:leading-normal mb-2 sm:mb-4 duration-200">
-            Bhima Bhoi Medical College and Hospital
+          <button className="text-xl hover:text-primary hover:scale-105 md:text-5xl font-bold w-2/3 mx-auto md:leading-normal tracking-wide mb-2 sm:mb-4 duration-200">
+            STUDENTS&apos; ASSOCIATION BBMCH
           </button>
           <p className="text-lg">Balangir, Odisha</p>
-          <Drawer>
+          <Drawer className="">
             <DrawerTrigger>
               <Button className="mt-8 text-gray-700 font-semibold hover:scale-105">
                 Read More
@@ -191,30 +201,38 @@ const Landing = () => {
         </div>
       </div>
 
-
-      {/* features preview */}
-      <div className="mt-24">
-        <h2 className="pb-2 text-3xl font-semibold tracking-tight md:w-2/3 mx-auto text-center">
+      {/* soc preview */}
+      {/* from-green-400 to-green-900 via-primary-dark */}
+      <div className="mt-24 bg-gradient-to-br from-maroon via-[#ca8a04] to-background py-8">
+        <h2 className="pb-2 text-lg md:text-3xl font-bold md:w-2/3 mx-auto text-center text-primary">
           ABOUT THE SOCIETIES
         </h2>
-        <p className="pb-2 md:text-xl font-semibold tracking-tight md:w-2/3 mx-auto text-center">
+        <p className="pb-2 mt-2 md:text-xl font-semibold tracking-tight md:w-2/3 mx-auto text-center">
           The whole association had been divided into 8 societies headed by
           secretaries of different disciplines. The societies are as follows:
         </p>
         <div className="md:flex flex-wrap justify-around mb-16">
-          {societies.map((item) => {
+          {societies.map((item, i) => {
             return (
               <Card
-                key={item.title}
-                className="md:w-1/4 hover:scale-105 duration-200 mt-16 mx-8 text-center"
+                key={item.id}
+                className="md:w-1/4 mt-16 mx-8 text-center hover:scale-105 hover:bg-gradient-to-tr hover:from-yellow-100 duration-200"
               >
-                <div className="w-fit mx-auto mt-4">
-                  <item.icon size={50} />
-                </div>
-                <CardHeader>
-                  <CardTitle>{item.title}</CardTitle>
-                  <CardDescription>{item.description}</CardDescription>
-                </CardHeader>
+                <button
+                  onClick={() => navigate(item.link)}
+                  data-aos="fade-up"
+                  className="hover:scale-105 duration-200"
+                >
+                  <div className="w-fit mx-auto mt-4">
+                    <item.icon size={50} />
+                  </div>
+                  <CardHeader>
+                    <CardTitle className="text-maroon">{item.title}</CardTitle>
+                    <CardDescription className="text-gray-700">
+                      {item.description}
+                    </CardDescription>
+                  </CardHeader>
+                </button>
               </Card>
             );
           })}

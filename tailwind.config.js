@@ -34,6 +34,7 @@ export default {
           dark: "#cca300",
         },
         text: "#cccccc",
+        maroon: "#5a0000",
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",

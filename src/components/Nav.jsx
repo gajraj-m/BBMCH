@@ -23,6 +23,7 @@ import { HiMenuAlt2 } from "react-icons/hi";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { signOut } from "../redux/slices/userSlice";
+import Logo from '../../public/assets/logo.png'
 
 const events = [
   {
@@ -74,59 +75,22 @@ const resources = [
     description:
       "Discover services aiding your educational journey and future endeavors.",
   },
+  // {
+  //   title: "Campus Facilities",
+  //   href: "/resources/campus-facilities",
+  //   description:
+  //     "Navigate through our campus infrastructure for a seamless student experience.",
+  // },
   {
-    title: "Campus Facilities",
-    href: "/resources/campus-facilities",
-    description:
-      "Navigate through our campus infrastructure for a seamless student experience.",
-  },
-  {
-    title: "News & Updates",
-    href: "/resources/news-updates",
+    title: "Journals",
+    href: "/resources/journals",
     description: "Stay informed with the latest happenings and announcements.",
   },
-];
-
-const contactUs = [
   {
-    title: "Contact Us",
-    href: "/contact-us",
+    title: "Shop",
+    href: "/resources/shop",
     description:
-      "Reach out to us for any queries, suggestions, or to connect with our vibrant student body community.",
-  },
-];
-
-const products = [
-  {
-    title: "LMS Themes",
-    href: "/products/lms-themes",
-    description:
-      "Explore beautifully designed themes for your LMS websites. Customize and enhance the look of your online courses with ease.",
-  },
-
-  // LMS Tools
-  {
-    title: "LMS Tools",
-    href: "/products/lms-tools",
-    description:
-      "Discover powerful tools to streamline your online teaching experience. From analytics to interactive quizzes, optimize your LMS for success.",
-  },
-];
-
-const company = [
-  {
-    title: "Career",
-    href: "/company/career",
-    description:
-      "Join our team and be part of an exciting journey. Explore career opportunities and find the perfect fit for your skills and passion.",
-  },
-
-  // About
-  {
-    title: "About",
-    href: "/company/about",
-    description:
-      "Learn more about our company, mission, and values. Discover our story and the people behind the scenes shaping the future of online education.",
+      "Explore a variety of products and find great deals in our online shop.",
   },
 ];
 
@@ -160,8 +124,9 @@ const Nav = () => {
       <div className="items-center max-w-screen-xl mx-auto md:flex">
         <div className="flex items-center justify-between py-3 md:block">
           <a href="/" className="flex space-x-3 items-center">
-            <FaUniversity size={34} />
-            <h1 className="md:text-2xl font-semibold hover:text-primary duration-200">
+            {/* <FaUniversity size={34} /> */}
+            <img src={Logo} alt="" className="h-12 w-12" />
+            <h1 className="md:text-2xl font-semibold text-primary hover:text-primary-dark duration-200">
               BBMCH
             </h1>
           </a>
