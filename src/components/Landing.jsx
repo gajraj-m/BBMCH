@@ -108,7 +108,6 @@ const Landing = () => {
     },
   ];
 
-
   const testimonials = [
     {
       quote: "Transformative Learning Experience!",
@@ -160,7 +159,49 @@ const Landing = () => {
             <DrawerContent className="p-8">
               <div className="bg-gray-900 text-white flex items-center justify-center mt-8">
                 <div className="max-w-3/4 text-center" data-aos="zoom-in-left">
-                  <h2 className="text-lg md:text-xl lg:text-2xl font-bold mb-4">
+                  <p>
+                    Nestled in the heart of the picturesque town of Balangir,
+                    Odisha, stands the esteemed Bhima Bhoi Medical College and
+                    Hospital (BBMCH), a beacon of hope and healing for the
+                    community it serves. With its towering buildings and
+                    state-of-the-art facilities, BBMCH stands as a testament to
+                    the unwavering commitment to excellence in medical education
+                    and healthcare. As the sun rises over the sprawling campus,
+                    students from diverse backgrounds gather to embark on their
+                    journey towards becoming compassionate healers and skilled
+                    medical professionals. The corridors resonate with the eager
+                    footsteps of aspiring doctors, nurses, and healthcare
+                    professionals, each driven by the noble pursuit of
+                    alleviating human suffering. From the bustling emergency
+                    department to the serene wards, every corner of BBMCH echoes
+                    with the ethos of empathy and healing. The
+                    institution&apos;s commitment to academic excellence is
+                    evident in its well-equipped laboratories, modern
+                    classrooms, and faculty comprising of distinguished scholars
+                    and experienced practitioners. Here, knowledge is not just
+                    imparted; it is nurtured, cultivated, and imbued with a
+                    sense of responsibility towards society. Beyond its academic
+                    and healthcare prowess, BBMCH stands as a symbol of
+                    community empowerment. It serves as a lifeline for the
+                    people of Balangir and its surrounding areas, providing
+                    accessible and affordable healthcare to those in need. The
+                    hospital&apos;s outreach programs, preventive care
+                    initiatives, and community health campaigns are testaments
+                    to its dedication to holistic well-being. In the midst of
+                    its bustling energy and tireless dedication, BBMCH remains
+                    rooted in the timeless wisdom of its namesake, Bhima Bhoi.
+                    Just as the revered poet and saint sought to uplift humanity
+                    through his verses, BBMCH endeavors to uplift lives through
+                    the healing touch of modern medicine. In Balangir, Odisha,
+                    BBMCH stands tall as a testament to humanity&apos;s enduring
+                    quest for healing and compassion. As the sun sets on another
+                    day at BBMCH, the institution stands as a beacon of hope, a
+                    sanctuary for the sick, and a cradle for future healers. It
+                    is a place where knowledge meets empathy, where science
+                    merges with service, and where every life is held in
+                    reverence.
+                  </p>
+                  {/* <h2 className="text-lg md:text-xl lg:text-2xl font-bold mb-4">
                     Who We Are?
                   </h2>
                   <p className="mb-8">
@@ -193,7 +234,7 @@ const Landing = () => {
                     team includes a board of executives and a long list of
                     general body members who have always been integral to the
                     association.
-                  </p>
+                  </p> */}
                 </div>
               </div>
             </DrawerContent>

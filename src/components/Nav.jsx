@@ -115,18 +115,18 @@ const ListItem = ({ title, desc, href }) => {
 const Nav = () => {
   const [state, setState] = useState(false);
   const { currentUser } = useSelector((state) => state.user);
-  console.log(currentUser)
+  console.log(currentUser);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   return (
     //
-    <nav className="bg-background w-full px-6 py-4 lg:p-12 lg:py-4 fixed z-40">
+    <nav className="bg-background w-full px-6  lg:p-8 lg:py-2 fixed z-40">
       <div className="items-center max-w-screen-xl mx-auto md:flex">
         <div className="flex items-center justify-between py-3 md:block">
           <a href="/" className="flex space-x-3 items-center">
             {/* <FaUniversity size={34} /> */}
-            <img src={Logo} alt="" className="h-12 w-12" />
+            <img src={Logo} alt="" className="h-10 w-10" />
             <h1 className="md:text-2xl font-semibold text-primary hover:text-primary-dark duration-200">
               BBMCH
             </h1>
