@@ -115,7 +115,6 @@ const ListItem = ({ title, desc, href }) => {
 const Nav = () => {
   const [state, setState] = useState(false);
   const { currentUser } = useSelector((state) => state.user);
-  console.log(currentUser);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

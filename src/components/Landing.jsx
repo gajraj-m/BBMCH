@@ -47,7 +47,6 @@ import { useSelector } from "react-redux";
 
 const Landing = () => {
   const { currentUser } = useSelector((state) => state.user);
-  console.log(currentUser);
   const navigate = useNavigate();
 
   const societies = [
