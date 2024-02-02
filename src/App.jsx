@@ -9,32 +9,39 @@ import AuthRoute from "./components/AuthRoute";
 import { useSelector } from "react-redux";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Literary from './pages/societies/Literary'
-import Cultural from './pages/societies/Cultural'
+import Literary from "./pages/societies/Literary";
+import Cultural from "./pages/societies/Cultural";
 import AudioVisual from "./pages/societies/AudioVisual";
 import Athletic from "./pages/societies/Athletic";
 import Dramatic from "./pages/societies/Dramatic";
 import FineArts from "./pages/societies/FineArts";
 import SocialService from "./pages/societies/SocialService";
 import Hostel from "./pages/societies/Hostel";
-import Footer from "./components/Footer";
+import AdminPrivateRoute from "./components/AdminPrivateRoute";
+import AdminPanel from "./pages/AdminPanel";
+import Blog from "./pages/Blog";
+import BlogDetail from "./pages/BlogDetail";
+import Nav from "./components/Nav";
 
 function App() {
-
- useEffect(() => {
-   Aos.init({
-     duration: 1800,
-     offset: 100,
-     // disable: "mobile",
-   });
- }, []);
+  useEffect(() => {
+    Aos.init({
+      duration: 1800,
+      offset: 100,
+      // disable: "mobile",
+    });
+  }, []);
   const { currentUser } = useSelector((state) => state.user);
   return (
     <BrowserRouter>
       {/* header */}
-      {/* <Nav /> */}
+      <Nav />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/resources/blog">
+          <Route path="" element={<Blog />} />
+          <Route path=":id" element={<BlogDetail />} />
+        </Route>
         <Route path="/societies">
           <Route path="literary" element={<Literary />} />
           <Route path="cultural" element={<Cultural />} />
@@ -54,8 +61,12 @@ function App() {
         <Route element={<PrivateRoute />}>
           <Route path="/profile" element={<Profile />} />
         </Route>
+
+        <Route element={<AdminPrivateRoute />}>
+          <Route path="/admin" element={<AdminPanel />} />
+        </Route>
       </Routes>
-      <Footer/>
+      {/* <Footer /> */}
     </BrowserRouter>
   );
 }

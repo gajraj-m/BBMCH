@@ -82,8 +82,8 @@ const resources = [
   //     "Navigate through our campus infrastructure for a seamless student experience.",
   // },
   {
-    title: "Journals",
-    href: "/resources/journals",
+    title: "Blog",
+    href: "/resources/blog",
     description: "Stay informed with the latest happenings and announcements.",
   },
   {
@@ -121,7 +121,7 @@ const Nav = () => {
 
   return (
     //
-    <nav className="bg-background w-full px-6  lg:p-8 lg:py-2 fixed z-40">
+    <nav className="bg-background w-full px-6 lg:p-8 lg:py-2 fixed z-40">
       <div className="items-center max-w-screen-xl mx-auto md:flex">
         <div className="flex items-center justify-between py-3 md:block">
           <a href="/" className="flex space-x-3 items-center">
@@ -250,6 +250,14 @@ const Nav = () => {
                   <FaRegUser className="mr-2 h-4 w-4" />
                   <span>Profile</span>
                 </DropdownMenuItem>
+
+                {/* conditional for admins only */}
+                {currentUser.role === "ADMIN" && (
+                  <DropdownMenuItem onClick={() => navigate("/admin")}>
+                    <FaRegUser className="mr-2 h-4 w-4" />
+                    <span>Admin Panel</span>
+                  </DropdownMenuItem>
+                )}
                 <DropdownMenuItem
                   onClick={() => {
                     dispatch(signOut());

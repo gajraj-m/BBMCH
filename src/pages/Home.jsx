@@ -1,14 +1,14 @@
-import React from 'react'
-import Nav from '../components/Nav';
-import Landing from '../components/Landing';
+import React from "react";
+import Landing from "../components/Landing";
+import Footer from "../components/Footer";
 
 const Home = () => {
   return (
     <div>
-      <Nav />
       <Landing />
+      <Footer />
     </div>
   );
-}
+};
 
-export default Home
+export default Home;
