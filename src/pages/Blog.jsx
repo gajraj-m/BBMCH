@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { collection, getDocs } from "firebase/firestore";
-import { db } from "../config/firebase"; // Import your Firebase configuration
+import { db } from "../config/firebase";
 import { useDispatch } from "react-redux";
 import { setBlog } from "../redux/slices/appSlice";
 
