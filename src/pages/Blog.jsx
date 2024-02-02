@@ -35,7 +35,7 @@ const Blog = () => {
   return (
     <div className="p-4">
       <div className="bg-background rounded-lg p-2 text-center mb-4 mt-20">
-        <h1 className="font-bold text-3xl text-primary">Blog Posts</h1>
+        <h1 className="font-bold text-3xl text-primary">Journals</h1>
       </div>
       <div className="flex flex-row space-x-6 mt-8">
         {blogPosts.map((post) => (
@@ -43,7 +43,7 @@ const Blog = () => {
             onClick={() => {
               dispatch(setBlog(post));
             }}
-            to={`/resources/blog/${post.id}`}
+            to={`/resources/journal/${post.id}`}
             key={post.id}
             className="bg-gray-100 rounded-lg shadow-md shadow-gray-600 text-center p-2 w-1/4 hover:scale-105 duration-200"
           >

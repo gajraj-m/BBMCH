@@ -70,20 +70,8 @@ const getInvolved = [
 
 const resources = [
   {
-    title: "Academic & Career Support",
-    href: "/resources/academic-career-support",
-    description:
-      "Discover services aiding your educational journey and future endeavors.",
-  },
-  // {
-  //   title: "Campus Facilities",
-  //   href: "/resources/campus-facilities",
-  //   description:
-  //     "Navigate through our campus infrastructure for a seamless student experience.",
-  // },
-  {
-    title: "Blog",
-    href: "/resources/blog",
+    title: "Journal",
+    href: "/resources/journal",
     description: "Stay informed with the latest happenings and announcements.",
   },
   {

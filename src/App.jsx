@@ -38,7 +38,7 @@ function App() {
       <Nav />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/resources/blog">
+        <Route path="/resources/journal">
           <Route path="" element={<Blog />} />
           <Route path=":id" element={<BlogDetail />} />
         </Route>
