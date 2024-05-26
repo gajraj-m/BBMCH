@@ -136,7 +136,7 @@ const Landing = () => {
   ];
 
   return (
-    <div className=" overflow-hidden">
+    <div className="overflow-hidden">
       <div className="relative h-screen flex items-center justify-center">
         <div className="mt-4 rounded-lg" data-aos="zoom-out">
           <img

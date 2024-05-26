@@ -22,6 +22,7 @@ import AdminPanel from "./pages/AdminPanel";
 import Blog from "./pages/Blog";
 import BlogDetail from "./pages/BlogDetail";
 import Nav from "./components/Nav";
+import Events from "./pages/Events";
 
 function App() {
   useEffect(() => {
@@ -38,6 +39,7 @@ function App() {
       <Nav />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/events" element={<Events />} />
         <Route path="/resources/journal">
           <Route path="" element={<Blog />} />
           <Route path=":id" element={<BlogDetail />} />

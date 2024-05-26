@@ -25,21 +25,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { signOut } from "../redux/slices/userSlice";
 import Logo from "../../public/assets/logo.png";
 
-const events = [
-  {
-    title: "Upcoming & Past Events",
-    href: "/events/list",
-    description:
-      "Dive into the excitement of what's to come and reminisce about memorable moments.",
-  },
-
-  {
-    title: "Event Calendar",
-    href: "/events/calendar",
-    description:
-      "Stay tuned with a comprehensive schedule of all upcoming activities.",
-  },
-];
+const events = {
+  title: "Events",
+  href: "/events",
+  description:
+    "Dive into the excitement of what's to come and reminisce about memorable moments.",
+};
 
 const aboutUs = [
   {
@@ -135,20 +126,13 @@ const Nav = () => {
           <ul className="justify-center items-center space-y-8 md:flex md:space-x-6 md:space-y-0">
             <NavigationMenu>
               <NavigationMenuList className="md:flex">
-                <NavigationMenuItem>
-                  <NavigationMenuTrigger>Events</NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-                      {events.map((event) => (
-                        <ListItem
-                          key={event.title}
-                          title={event.title}
-                          href={event.href}
-                          desc={event.description}
-                        />
-                      ))}
-                    </ul>
-                  </NavigationMenuContent>
+                <NavigationMenuItem className='mt-1'>
+                  <ListItem
+                    key={events.title}
+                    title={events.title}
+                    href={events.href}
+                    // desc={events.description}
+                  />
                 </NavigationMenuItem>
 
                 {/* company */}
