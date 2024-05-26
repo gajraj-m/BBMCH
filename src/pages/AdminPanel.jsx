@@ -11,12 +11,20 @@ import {
 } from "@/components/ui/dialog";
 import { v4 } from "uuid";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { collection, addDoc, getDocs } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  getDocs,
+  updateDoc,
+  doc,
+} from "firebase/firestore";
 import { storage, firebase, db } from "../config/firebase";
 import { useDispatch, useSelector } from "react-redux";
 
 const AdminPanel = () => {
   const [formData, setFormData] = useState({});
+  const [brochureFormData, setBrochureFormData] = useState({});
+  const [registerFormData, setRegisterFormData] = useState({});
   const [image, setImage] = useState(null);
   const [imageUrl, setImageUrl] = useState("");
   const { currentUser } = useSelector((state) => state.user);
@@ -48,6 +56,17 @@ const AdminPanel = () => {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
+  };
+
+  const handleBrochureChange = (e) => {
+    setBrochureFormData({ ...brochureFormData, [e.target.id]: e.target.value });
+  };
+
+  const handleRegisterChange = (e) => {
+    setRegisterFormData({
+      ...registerFormData,
+      [e.target.id]: e.target.value,
+    });
   };
 
   const handleSubmit = async (e) => {
@@ -91,6 +110,30 @@ const AdminPanel = () => {
       console.log(error);
     }
   };
+
+  const handleBrochureSave = async (e) => {
+    e.preventDefault();
+    try {
+      const dataRef = doc(db, "data", "constants"); // Reference to the specific document
+
+      const updateData = { ["brochure"]: brochureFormData.brochure }; // Update object with field and value
+      await updateDoc(dataRef, updateData);
+    } catch (error) {
+      console.error("Error updating document:", error);
+    }
+  };
+
+    const handleRegisterSave = async (e) => {
+      e.preventDefault();
+      try {
+        const dataRef = doc(db, "data", "constants"); // Reference to the specific document
+
+        const updateData = { ["register"]: registerFormData.register }; // Update object with field and value
+        await updateDoc(dataRef, updateData);
+      } catch (error) {
+        console.error("Error updating document:", error);
+      }
+    };
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -145,6 +188,74 @@ const AdminPanel = () => {
                   onChange={handleImageChange}
                 />
               </div>
+
+              <button
+                // disabled={loading}
+                className="bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80"
+              >
+                {/* {loading ? "Loading..." : "Save"} */}
+                Save
+              </button>
+              {/* <OAuth /> */}
+            </form>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* add brochure */}
+      <Dialog>
+        <DialogTrigger>
+          <Button className="text-gray-700 mt-24 ml-16">
+            Add Brochure Link
+          </Button>
+        </DialogTrigger>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Select your files to upload</DialogTitle>
+          </DialogHeader>
+          <div>
+            <form onSubmit={handleBrochureSave} className="flex flex-col gap-4">
+              <input
+                type="text"
+                placeholder="Brochure link"
+                id="brochure"
+                className="bg-slate-100 rounded-md p-2 text-xs text-black"
+                onChange={handleBrochureChange}
+              />
+
+              <button
+                // disabled={loading}
+                className="bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80"
+              >
+                {/* {loading ? "Loading..." : "Save"} */}
+                Save
+              </button>
+              {/* <OAuth /> */}
+            </form>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* add register */}
+      <Dialog>
+        <DialogTrigger>
+          <Button className="text-gray-700 mt-24 ml-16">
+            Add Register Link
+          </Button>
+        </DialogTrigger>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Select your files to upload</DialogTitle>
+          </DialogHeader>
+          <div>
+            <form onSubmit={handleRegisterSave} className="flex flex-col gap-4">
+              <input
+                type="text"
+                placeholder="Register Link"
+                id="register"
+                className="bg-slate-100 rounded-md p-2 text-xs text-black"
+                onChange={handleRegisterChange}
+              />
 
               <button
                 // disabled={loading}
