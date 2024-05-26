@@ -34,13 +34,13 @@ const Events = () => {
             <img src={Axon} alt="" className="w-1/2 rounded-lg mx-auto mt-8" />
           </div>
           <div className="flex flex-row w-2/3 justify-around mt-16 items-center mx-auto">
-            <button className="w-1/4 bg-[#9b1f53] h-12 rounded-full">
+            <button className="w-1/4 bg-[#9b1f53] h-12 rounded-full hover:scale-105 duration-150">
               <div className="flex flex-row space-x-2 items-center mx-auto w-fit">
                 <div className="bg-white h-3 w-3 rounded-full"></div>
                 <p>Brochure</p>
               </div>
             </button>
-            <button className="w-1/4 bg-[#9b1f53] h-12 rounded-full">
+            <button className="w-1/4 bg-[#9b1f53] h-12 rounded-full hover:scale-105 duration-150">
               {" "}
               <div className="flex flex-row space-x-2 items-center mx-auto w-fit">
                 <div className="bg-white h-3 w-3 rounded-full"></div>
