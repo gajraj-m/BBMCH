@@ -3,8 +3,9 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
-  DialogDescription,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -16,6 +17,7 @@ import {
   addDoc,
   getDocs,
   updateDoc,
+  deleteDoc,
   doc,
 } from "firebase/firestore";
 import { storage, firebase, db } from "../config/firebase";
@@ -25,6 +27,7 @@ const AdminPanel = () => {
   const [formData, setFormData] = useState({});
   const [brochureFormData, setBrochureFormData] = useState({});
   const [registerFormData, setRegisterFormData] = useState({});
+  const [aboutFormData, setAboutFormData] = useState({});
   const [image, setImage] = useState(null);
   const [imageUrl, setImageUrl] = useState("");
   const { currentUser } = useSelector((state) => state.user);
@@ -54,6 +57,20 @@ const AdminPanel = () => {
     fetchBlogPosts();
   }, []);
 
+  const handleDeleteBlog = async(post) => {
+    console.log(post)
+     try {
+       const blogDocRef = doc(db, "Blog", post.id); // Reference to the specific blog post document
+       await deleteDoc(blogDocRef);
+       console.log("Blog post deleted successfully!");
+
+       // Update your UI or state to reflect the deletion
+       // (e.g., refetch blog posts, remove post from displayed list)
+     } catch (error) {
+       console.error("Error deleting blog post:", error);
+     }
+  }
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
@@ -68,6 +85,12 @@ const AdminPanel = () => {
       [e.target.id]: e.target.value,
     });
   };
+   const handleAboutChange = (e) => {
+     setAboutFormData({
+       ...aboutFormData,
+       [e.target.id]: e.target.value,
+     });
+   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -135,6 +158,18 @@ const AdminPanel = () => {
       }
     };
 
+     const handleAboutSave = async (e) => {
+       e.preventDefault();
+       try {
+         const dataRef = doc(db, "data", "constants"); // Reference to the specific document
+
+         const updateData = { ["about"]: aboutFormData.about }; // Update object with field and value
+         await updateDoc(dataRef, updateData);
+       } catch (error) {
+         console.error("Error updating document:", error);
+       }
+     };
+
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     setImage(file);
@@ -189,6 +224,11 @@ const AdminPanel = () => {
                 />
               </div>
 
+              {/* <OAuth /> */}
+            </form>
+          </div>
+          <DialogFooter className="w-full">
+            <DialogClose asChild>
               <button
                 // disabled={loading}
                 className="bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80"
@@ -196,9 +236,8 @@ const AdminPanel = () => {
                 {/* {loading ? "Loading..." : "Save"} */}
                 Save
               </button>
-              {/* <OAuth /> */}
-            </form>
-          </div>
+            </DialogClose>
+          </DialogFooter>
         </DialogContent>
       </Dialog>
 
@@ -223,6 +262,11 @@ const AdminPanel = () => {
                 onChange={handleBrochureChange}
               />
 
+              {/* <OAuth /> */}
+            </form>
+          </div>
+          <DialogFooter className="w-full">
+            <DialogClose asChild>
               <button
                 // disabled={loading}
                 className="bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80"
@@ -230,9 +274,8 @@ const AdminPanel = () => {
                 {/* {loading ? "Loading..." : "Save"} */}
                 Save
               </button>
-              {/* <OAuth /> */}
-            </form>
-          </div>
+            </DialogClose>
+          </DialogFooter>
         </DialogContent>
       </Dialog>
 
@@ -257,6 +300,11 @@ const AdminPanel = () => {
                 onChange={handleRegisterChange}
               />
 
+              {/* <OAuth /> */}
+            </form>
+          </div>
+          <DialogFooter className="w-full">
+            <DialogClose asChild>
               <button
                 // disabled={loading}
                 className="bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80"
@@ -264,19 +312,55 @@ const AdminPanel = () => {
                 {/* {loading ? "Loading..." : "Save"} */}
                 Save
               </button>
+            </DialogClose>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* add about us link */}
+      <Dialog>
+        <DialogTrigger>
+          <Button className="text-gray-700 mt-24 ml-16">
+            Add About Us Link
+          </Button>
+        </DialogTrigger>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Select your files to upload</DialogTitle>
+          </DialogHeader>
+          <div>
+            <form onSubmit={handleAboutSave} className="flex flex-col gap-4">
+              <input
+                type="text"
+                placeholder="Register Link"
+                id="about"
+                className="bg-slate-100 rounded-md p-2 text-xs text-black"
+                onChange={handleAboutChange}
+              />
+
               {/* <OAuth /> */}
             </form>
           </div>
+          <DialogFooter className="w-full">
+            <DialogClose asChild>
+              <button
+                // disabled={loading}
+                className="bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80"
+              >
+                {/* {loading ? "Loading..." : "Save"} */}
+                Save
+              </button>
+            </DialogClose>
+          </DialogFooter>
         </DialogContent>
       </Dialog>
 
       <div className="flex flex-row space-x-6 mt-8">
         {blogPosts.map((post) => (
-          <Link
+          <div
             onClick={() => {
               // dispatch(setBlog(post));
             }}
-            to={`/resources/journal/${post.id}`}
             key={post.id}
             className="bg-gray-100 rounded-lg shadow-md shadow-gray-600 text-center p-2 w-1/4 hover:scale-105 duration-200"
           >
@@ -285,22 +369,41 @@ const AdminPanel = () => {
             <p className="text-gray-700 text-xs mt-2">
               {post.publishDate} . {post.readTime} min read
             </p>
-            <p className="text-gray-700 font-bold text-2xl mt-2">
+            <Link
+              className="text-gray-700 font-bold text-2xl mt-2"
+              to={`/resources/journal/${post.id}`}
+            >
               {post.title}
-            </p>
+            </Link>
             <p className="text-gray-700 text-sm mt-4 w-3/4 mx-auto">
               {post.content.slice(0, 50)}...
             </p>
 
-            <Button
-              className="bg-primary text-gray-800 mt-4"
-              onClick={() => {
-                handleDelete;
-              }}
-            >
-              Delete
-            </Button>
-          </Link>
+            <Dialog>
+              <DialogTrigger>
+                <Button className="bg-primary text-gray-800 mt-4">
+                  Delete
+                </Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>You Sure want to delete this post?</DialogTitle>
+                </DialogHeader>
+                <DialogFooter className="w-full">
+                  <DialogClose asChild>
+                    <button
+                      // disabled={loading}
+                      className="bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80"
+                      onClick={() => handleDeleteBlog(post)}
+                    >
+                      {/* {loading ? "Loading..." : "Save"} */}
+                      Yes
+                    </button>
+                  </DialogClose>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
+          </div>
         ))}
       </div>
     </div>

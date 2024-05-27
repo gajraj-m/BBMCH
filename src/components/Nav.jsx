@@ -32,18 +32,11 @@ const events = {
     "Dive into the excitement of what's to come and reminisce about memorable moments.",
 };
 
-const aboutUs = [
-  {
-    title: "Mission & Vision",
-    href: "/about-us/mission-vision",
+const aboutUs =  {
+    title: "About Us",
+    href: "/about-us",
     description: "Unveiling our core values and future aspirations.",
-  },
-  {
-    title: "Leadership Team",
-    href: "/about-us/leadership-team",
-    description: "Meet the faces steering the course of our student community.",
-  },
-];
+  };
 
 const getInvolved = [
   {
@@ -126,7 +119,7 @@ const Nav = () => {
           <ul className="justify-center items-center space-y-8 md:flex md:space-x-6 md:space-y-0">
             <NavigationMenu>
               <NavigationMenuList className="md:flex">
-                <NavigationMenuItem className='mt-1'>
+                <NavigationMenuItem className="mt-1">
                   <ListItem
                     key={events.title}
                     title={events.title}
@@ -137,20 +130,13 @@ const Nav = () => {
 
                 {/* company */}
 
-                <NavigationMenuItem>
-                  <NavigationMenuTrigger>About Us</NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-                      {aboutUs.map((about) => (
-                        <ListItem
-                          key={about.title}
-                          title={about.title}
-                          href={about.href}
-                          desc={about.description}
-                        />
-                      ))}
-                    </ul>
-                  </NavigationMenuContent>
+                <NavigationMenuItem className="mt-1">
+                  <ListItem
+                    key={aboutUs.title}
+                    title={aboutUs.title}
+                    href={aboutUs.href}
+                    // desc={events.description}
+                  />
                 </NavigationMenuItem>
 
                 {/* get Involved */}

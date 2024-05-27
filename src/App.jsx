@@ -23,6 +23,7 @@ import Blog from "./pages/Blog";
 import BlogDetail from "./pages/BlogDetail";
 import Nav from "./components/Nav";
 import Events from "./pages/Events";
+import About from "./pages/About";
 
 function App() {
   useEffect(() => {
@@ -39,6 +40,7 @@ function App() {
       <Nav />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/about-us" element={<About />} />
         <Route path="/events" element={<Events />} />
         <Route path="/resources/journal">
           <Route path="" element={<Blog />} />
