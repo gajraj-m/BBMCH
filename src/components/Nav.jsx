@@ -40,14 +40,14 @@ const aboutUs =  {
 
 const getInvolved = [
   {
-    title: "Clubs & Organizations",
-    href: "/get-involved/clubs-organizations",
+    title: "Societies",
+    href: "/get-involved/societies",
     description:
       "Explore diverse interests and find your community within our array of student groups.",
   },
   {
-    title: "Volunteer Opportunities",
-    href: "/get-involved/volunteer-opportunities",
+    title: "Student's Panel",
+    href: "/get-involved/students",
     description: "Make a difference by contributing your time and skills.",
   },
 ];

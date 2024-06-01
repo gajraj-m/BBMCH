@@ -37,7 +37,7 @@ function App() {
   return (
     <BrowserRouter>
       {/* header */}
-      <Nav />
+      
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about-us" element={<About />} />

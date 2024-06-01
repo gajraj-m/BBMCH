@@ -4,6 +4,7 @@ import Footer from "../components/Footer";
 
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../config/firebase";
+import Nav from "../components/Nav";
 
 const Home = () => {
   useEffect(() => {
@@ -31,6 +32,7 @@ const Home = () => {
 
   return (
     <div>
+      <Nav />
       <Landing />
       <Footer />
     </div>

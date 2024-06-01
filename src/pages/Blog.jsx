@@ -4,6 +4,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "../config/firebase";
 import { useDispatch } from "react-redux";
 import { setBlog } from "../redux/slices/appSlice";
+import Nav from "../components/Nav";
 
 const Blog = () => {
   const [blogPosts, setBlogPosts] = useState([]);
@@ -34,6 +35,7 @@ const Blog = () => {
 
   return (
     <div className="p-4">
+      <Nav />
       <div className="bg-background rounded-lg p-2 text-center mb-4 mt-20">
         <h1 className="font-bold text-3xl text-primary">Journals</h1>
       </div>

@@ -1,14 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Background from "../assets/bg.png";
 import Axon from "../assets/AXON.png";
-import {
-  collection,
-  addDoc,
-  getDoc,
-  updateDoc,
-  doc,
-} from "firebase/firestore";
+import { collection, addDoc, getDoc, updateDoc, doc } from "firebase/firestore";
 import { storage, firebase, db } from "../config/firebase";
+import Nav from "../components/Nav";
 
 const Events = () => {
   const [brochureLink, setBrochureLink] = useState("");
@@ -22,8 +17,8 @@ const Events = () => {
 
         if (docSnap.exists) {
           const data = docSnap.data();
-          setBrochureLink(data.brochure)
-          setRegisterLink(data.register)
+          setBrochureLink(data.brochure);
+          setRegisterLink(data.register);
         } else {
           console.log("No document found!");
         }
@@ -38,6 +33,7 @@ const Events = () => {
 
   return (
     <div className="overflow-hidden">
+      <Nav />
       <div className="relative h-screen flex items-center justify-center">
         {/* Background image with red circle in bottom left corner */}
         <div className="mt-4 rounded-lg" data-aos="zoom-out">

@@ -244,7 +244,7 @@ const Landing = () => {
 
       {/* soc preview */}
       {/* from-green-400 to-green-900 via-primary-dark */}
-      <div className="mt-24 bg-gradient-to-br from-maroon via-[#ca8a04] to-background py-8">
+      <div id="societies" className="mt-24 bg-gradient-to-br from-maroon via-[#ca8a04] to-background py-8">
         <h2 className="pb-2 text-lg md:text-3xl font-bold md:w-2/3 mx-auto text-center text-primary">
           ABOUT THE SOCIETIES
         </h2>
