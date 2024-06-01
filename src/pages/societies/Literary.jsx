@@ -3,31 +3,11 @@ import Nav from "../../components/Nav";
 import { FiInstagram } from "react-icons/fi";
 import { getDoc, doc } from "firebase/firestore";
 import { db } from "../../config/firebase";
+import { useSelector } from "react-redux";
 
 const Literary = () => {
-
-  const [images, setImages] = useState([])
-
-  useEffect(() => {
-    const fetchEventData = async () => {
-      try {
-        const dataRef = doc(db, "gallery", "literary"); // Reference to the specific document
-        const docSnap = await getDoc(dataRef);
-
-        if (docSnap.exists) {
-          const data = docSnap.data();
-          setImages(data);
-        } else {
-          console.log("No document found!");
-        }
-      } catch (error) {
-        console.error("Error fetching document:", error);
-      }
-    };
-
-    // Call the function to fetch blog posts
-    fetchEventData();
-  }, []);
+  const { gallery } = useSelector((state) => state.app);
+  console.log(gallery);
 
   return (
     <div className="overflow-hidden">
@@ -52,6 +32,18 @@ const Literary = () => {
         >
           <FiInstagram className="mx-auto mt-8 hover:fill-pink-700" size={30} />
         </a>
+      </div>
+
+      {/* gallery */}
+      <div className="flex flex-row space-x-6 mt-8">
+        {gallery?.Literary?.map((image, id) => (
+          <div
+            key={id}
+            className="bg-gray-100 rounded-lg shadow-md shadow-gray-600 text-center p-2 w-1/4 hover:scale-105 duration-200"
+          >
+            <img src={image.image} alt="" className="w-full rounded-lg" />
+          </div>
+        ))}
       </div>
     </div>
   );

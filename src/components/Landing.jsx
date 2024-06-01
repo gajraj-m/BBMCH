@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import HeroImage from "/assets/hero.jpg";
 import FeatureImage1 from "/assets/feature1.svg";
 import ToolImage from "/assets/tool.svg";
@@ -28,12 +28,6 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-
-import { IoSpeedometerOutline } from "react-icons/io5";
-import { LuWarehouse } from "react-icons/lu";
-import { MdOutlineShoppingCartCheckout } from "react-icons/md";
-import { MdOutlineGroups } from "react-icons/md";
-import { TbBrandGoogleAnalytics } from "react-icons/tb";
 import { IoBookOutline } from "react-icons/io5";
 import { IoPeopleOutline } from "react-icons/io5";
 import { FaRegFileAudio } from "react-icons/fa";
@@ -43,11 +37,24 @@ import { BiPaint } from "react-icons/bi";
 import { FaRegBuilding } from "react-icons/fa";
 
 import { Link, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import {
+  collection,
+  addDoc,
+  getDocs,
+  getDoc,
+  updateDoc,
+  deleteDoc,
+  doc,
+  arrayUnion,
+} from "firebase/firestore";
+import { storage, firebase, db } from "../config/firebase";
+import { useDispatch, useSelector } from "react-redux";
 
 const Landing = () => {
   const { currentUser } = useSelector((state) => state.user);
   const navigate = useNavigate();
+ 
+  const dispatch = useDispatch();
 
   const societies = [
     {
@@ -244,7 +251,10 @@ const Landing = () => {
 
       {/* soc preview */}
       {/* from-green-400 to-green-900 via-primary-dark */}
-      <div id="societies" className="mt-24 bg-gradient-to-br from-maroon via-[#ca8a04] to-background py-8">
+      <div
+        id="societies"
+        className="mt-24 bg-gradient-to-br from-maroon via-[#ca8a04] to-background py-8"
+      >
         <h2 className="pb-2 text-lg md:text-3xl font-bold md:w-2/3 mx-auto text-center text-primary">
           ABOUT THE SOCIETIES
         </h2>
