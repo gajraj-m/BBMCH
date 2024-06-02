@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import Nav from "../components/Nav";
 
 const StudentsPanel = () => {
   const { constants } = useSelector((state) => state.app);
@@ -9,7 +10,10 @@ const StudentsPanel = () => {
     return (
       <div className="mt-8">
         {/* Button to open quiz in a new tab */}
-        <button onClick={() => window.open(constants.quiz?.link, "_blank")} className="hover:scale-105 duration-150">
+        <button
+          onClick={() => window.open(constants.quiz?.link, "_blank")}
+          className="hover:scale-105 duration-150"
+        >
           <h3 className="bg-slate-600 p-4 w-fit rounded-lg">
             {constants.quiz?.title}
           </h3>
@@ -19,8 +23,9 @@ const StudentsPanel = () => {
   };
 
   return (
-    <div className="p-8">
-      <h2>Available Quizzes</h2>
+    <div className="p-4">
+      <Nav />
+      <h2 className="mt-32">Available Quizzes</h2>
       {constants.quiz.title !== undefined && constants.quiz.title !== "" ? (
         renderQuizzes()
       ) : (
