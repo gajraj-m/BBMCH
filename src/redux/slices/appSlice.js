@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   blog: {},
-  gallery: {}
+  gallery: {},
+  constants: {}
 };
 
 const appSlice = createSlice({
@@ -15,9 +16,12 @@ const appSlice = createSlice({
     setGallery: (state, action) => {
       state.gallery = action.payload;
     },
+    setConstants: (state, action) => {
+      state.constants = action.payload;
+    },
   },
 });
 
-export const { setBlog, setGallery } = appSlice.actions;
+export const { setBlog, setGallery, setConstants } = appSlice.actions;
 
 export default appSlice.reducer;

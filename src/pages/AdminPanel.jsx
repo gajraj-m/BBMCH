@@ -26,8 +26,6 @@ import { storage, firebase, db } from "../config/firebase";
 import { useDispatch, useSelector } from "react-redux";
 import Nav from "../components/Nav";
 
-
-
 const AdminPanel = () => {
   const [formData, setFormData] = useState({});
   const [brochureFormData, setBrochureFormData] = useState({});
@@ -39,17 +37,18 @@ const AdminPanel = () => {
   const [blogPosts, setBlogPosts] = useState([]);
   const dispatch = useDispatch();
   const [gallery, setGallery] = useState({});
+  const [quizFormData, setQuizFormData] = useState({});
 
   const societyCollections = [
-  'literary',
-  'cultural',
-  'audioVisual',
-  'athletic',
-  'dramatic',
-  'fineArts',
-  'socialService',
-  'hostel',
-];
+    "literary",
+    "cultural",
+    "audioVisual",
+    "athletic",
+    "dramatic",
+    "fineArts",
+    "socialService",
+    "hostel",
+  ];
 
   useEffect(() => {
     const fetchBlogPosts = async () => {
@@ -220,6 +219,12 @@ const AdminPanel = () => {
       [e.target.id]: e.target.value,
     });
   };
+  const handleQuizChange = (e) => {
+    setQuizFormData({
+      ...quizFormData,
+      [e.target.id]: e.target.value,
+    });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -302,6 +307,18 @@ const AdminPanel = () => {
     }
   };
 
+  const handleQuizSave = async (e) => {
+    e.preventDefault();
+    try {
+      const dataRef = doc(db, "data", "constants"); // Reference to the specific document
+
+      const updateData = { ["quiz"]: quizFormData }; // Update object with field and value
+      await updateDoc(dataRef, updateData);
+    } catch (error) {
+      console.error("Error updating document:", error);
+    }
+  };
+
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     setImage(file);
@@ -332,9 +349,9 @@ const AdminPanel = () => {
 
       // await setDoc(doc(db, "Blog", currentUser.id), document);
       const dataRef = doc(db, "data", "gallery"); // Reference to the specific document
-       await updateDoc(dataRef, {
-         [documentName]: arrayUnion(document), // Use arrayUnion to safely add to an array
-       });
+      await updateDoc(dataRef, {
+        [documentName]: arrayUnion(document), // Use arrayUnion to safely add to an array
+      });
     } catch (error) {
       console.log(error);
     }
@@ -352,9 +369,9 @@ const AdminPanel = () => {
         array = data?.[documentName];
 
         const filteredArray = array.filter((item, index) => index !== imageId); // Filter out the image to delete
-         await updateDoc(dataRef, {
-           [documentName]: filteredArray,
-         });
+        await updateDoc(dataRef, {
+          [documentName]: filteredArray,
+        });
       } else {
         console.log("No document found!");
       }
@@ -516,6 +533,40 @@ const AdminPanel = () => {
                 className="bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80"
               >
                 {/* {loading ? "Loading..." : "Save"} */}
+                Save
+              </button>
+            </form>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* quiz */}
+      <Dialog>
+        <DialogTrigger>
+          <Button className="text-gray-700 mt-24 ml-16">Add Quiz</Button>
+        </DialogTrigger>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Select your files to upload</DialogTitle>
+          </DialogHeader>
+          <div>
+            <form onSubmit={handleQuizSave} className="flex flex-col gap-4">
+              <input
+                type="text"
+                placeholder="Quiz Title"
+                id="title"
+                className="bg-slate-100 rounded-md p-2 text-xs text-black"
+                onChange={handleQuizChange}
+              />
+              <input
+                type="text"
+                placeholder="Link"
+                id="link"
+                className="bg-slate-100 rounded-md p-2 text-xs text-black"
+                onChange={handleQuizChange}
+              />
+
+              <button className="bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80">
                 Save
               </button>
             </form>
