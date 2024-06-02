@@ -1,13 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Nav from "../../components/Nav";
 import { FiInstagram } from "react-icons/fi";
-import { getDoc, doc } from "firebase/firestore";
-import { db } from "../../config/firebase";
 import { useSelector } from "react-redux";
 
 const Literary = () => {
   const { gallery } = useSelector((state) => state.app);
-  console.log(gallery);
 
   return (
     <div className="overflow-hidden">
@@ -35,8 +32,9 @@ const Literary = () => {
       </div>
 
       {/* gallery */}
-      <div className="flex flex-row space-x-6 mt-8">
-        {gallery?.Literary?.map((image, id) => (
+      <h2 className="font-bold mt-16 text-3xl p-4">Gallery</h2>
+      <div className="flex flex-row space-x-6 mt-8 p-4">
+        {gallery?.literary?.map((image, id) => (
           <div
             key={id}
             className="bg-gray-100 rounded-lg shadow-md shadow-gray-600 text-center p-2 w-1/4 hover:scale-105 duration-200"

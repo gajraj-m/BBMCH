@@ -6,9 +6,9 @@ import { collection, getDocs, getDoc, doc } from "firebase/firestore";
 import { db } from "../config/firebase";
 import { useDispatch, useSelector } from "react-redux";
 import Nav from "../components/Nav";
+import { setConstants, setGallery } from "../redux/slices/appSlice";
 
 const Home = () => {
-  const [gallery, setGallery] = useState({});
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -36,12 +36,22 @@ const Home = () => {
 
         if (docSnap.exists) {
           const data = docSnap.data();
-          setGallery(data);
-          // dispatch(setGallery(data));
-          console.log(data);
+          dispatch(setGallery(data))
         } else {
           console.log("No document found!");
         }
+
+        const constRef = doc(db, "data", "constants")
+        const constSnap = await getDoc(constRef)
+
+        if (constSnap.exists) {
+          const data = constSnap.data();
+          console.log(data)
+          dispatch(setConstants(data));
+        } else {
+          console.log("No document found!");
+        }
+
       } catch (error) {
         console.error("Error fetching data:", error);
       }

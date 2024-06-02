@@ -24,6 +24,7 @@ import BlogDetail from "./pages/BlogDetail";
 import Nav from "./components/Nav";
 import Events from "./pages/Events";
 import About from "./pages/About";
+import StudentsPanel from "./pages/StudentsPanel";
 
 function App() {
   useEffect(() => {
@@ -64,6 +65,7 @@ function App() {
 
         <Route element={<PrivateRoute />}>
           <Route path="/profile" element={<Profile />} />
+          <Route path="/students" element={<StudentsPanel />} />
         </Route>
 
         <Route element={<AdminPrivateRoute />}>

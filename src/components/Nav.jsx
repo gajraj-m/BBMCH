@@ -32,25 +32,17 @@ const events = {
     "Dive into the excitement of what's to come and reminisce about memorable moments.",
 };
 
-const aboutUs =  {
-    title: "About Us",
-    href: "/about-us",
-    description: "Unveiling our core values and future aspirations.",
-  };
+const aboutUs = {
+  title: "About Us",
+  href: "/about-us",
+  description: "Unveiling our core values and future aspirations.",
+};
 
-const getInvolved = [
-  {
-    title: "Societies",
-    href: "/get-involved/societies",
-    description:
-      "Explore diverse interests and find your community within our array of student groups.",
-  },
-  {
-    title: "Student's Panel",
-    href: "/get-involved/students",
-    description: "Make a difference by contributing your time and skills.",
-  },
-];
+const studentsPanel = {
+  title: "Student's Panel",
+  href: "/students",
+  description: "Make a difference by contributing your time and skills.",
+};
 
 const resources = [
   {
@@ -128,8 +120,6 @@ const Nav = () => {
                   />
                 </NavigationMenuItem>
 
-                {/* company */}
-
                 <NavigationMenuItem className="mt-1">
                   <ListItem
                     key={aboutUs.title}
@@ -141,20 +131,13 @@ const Nav = () => {
 
                 {/* get Involved */}
 
-                <NavigationMenuItem>
-                  <NavigationMenuTrigger>Get Involved</NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-                      {getInvolved.map((item) => (
-                        <ListItem
-                          key={item.title}
-                          title={item.title}
-                          href={item.href}
-                          desc={item.description}
-                        />
-                      ))}
-                    </ul>
-                  </NavigationMenuContent>
+                <NavigationMenuItem className="mt-1">
+                  <ListItem
+                    key={studentsPanel.title}
+                    title={studentsPanel.title}
+                    href={studentsPanel.href}
+                    // desc={events.description}
+                  />
                 </NavigationMenuItem>
 
                 {/* res */}
