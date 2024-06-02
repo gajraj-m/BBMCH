@@ -25,6 +25,9 @@ import {
 import { storage, firebase, db } from "../config/firebase";
 import { useDispatch, useSelector } from "react-redux";
 import Nav from "../components/Nav";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const AdminPanel = () => {
   const [formData, setFormData] = useState({});
@@ -32,12 +35,24 @@ const AdminPanel = () => {
   const [registerFormData, setRegisterFormData] = useState({});
   const [aboutFormData, setAboutFormData] = useState({});
   const [image, setImage] = useState(null);
+  const [shopImages, setShopImages] = useState([]);
   const [imageUrl, setImageUrl] = useState("");
   const { currentUser } = useSelector((state) => state.user);
   const [blogPosts, setBlogPosts] = useState([]);
   const dispatch = useDispatch();
   const [gallery, setGallery] = useState({});
   const [quizFormData, setQuizFormData] = useState({});
+  const [shopFormData, setShopFormData] = useState({});
+  const [shop, setShop] = useState([]);
+
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
 
   const societyCollections = [
     "literary",
@@ -69,8 +84,25 @@ const AdminPanel = () => {
       }
     };
 
+    const fetchShopItems = async () => {
+      try {
+        const shopItemsRef = collection(db, "Shop");
+        const shopItemsSnapshot = await getDocs(shopItemsRef);
+        const items = shopItemsSnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setShop(items);
+        console.log(items)
+      } catch (error) {
+        console.error("Error fetching shop items:", error);
+        return []; // Return empty array on error
+      }
+    };
+
     // Call the function to fetch blog posts
     fetchBlogPosts();
+    fetchShopItems();
   }, []);
 
   useEffect(() => {
@@ -199,6 +231,16 @@ const AdminPanel = () => {
     }
   };
 
+    const handleDeleteShopItem = async (item) => {
+      try {
+        const shopDocRef = doc(db, "Shop", item.id); // Reference to the specific blog post document
+        await deleteDoc(shopDocRef);
+        console.log("Shop item deleted successfully!");
+      } catch (error) {
+        console.error("Error deleting blog post:", error);
+      }
+    };
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
@@ -224,6 +266,10 @@ const AdminPanel = () => {
       ...quizFormData,
       [e.target.id]: e.target.value,
     });
+  };
+
+  const handleShopChange = (e) => {
+    setShopFormData({ ...shopFormData, [e.target.id]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
@@ -324,6 +370,11 @@ const AdminPanel = () => {
     setImage(file);
   };
 
+  const handleShopImagesChange = (event) => {
+    const newImages = [...shopImages, ...event.target.files]; // Spread operator
+    setShopImages(newImages);
+  };
+
   const handleGallerySubmit = async (e, documentName) => {
     e.preventDefault();
     try {
@@ -377,6 +428,37 @@ const AdminPanel = () => {
       }
     } catch (error) {
       console.error("Error deleting image:", error);
+    }
+  };
+
+  const handleShopItemSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const imageUrls = []; // Array to store download URLs
+
+      if (shopImages) {
+        // Assuming 'images' is an array of files
+        for (const image of shopImages) {
+          try {
+            const imageRef = ref(storage, `images/Shop/${image.name + v4()}`);
+            const res = await uploadBytes(imageRef, image);
+            const downloadUrl = await getDownloadURL(res.ref);
+            imageUrls.push(downloadUrl);
+          } catch (err) {
+            console.log(err);
+          }
+        }
+      }
+
+      const document = {
+        ...shopFormData,
+        images: imageUrls, // Store all uploaded image URLs in an array
+      };
+
+      await addDoc(collection(db, "Shop"), document);
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -629,6 +711,143 @@ const AdminPanel = () => {
       </div>
 
       {renderAllSocietiesGallery()}
+
+      {/* shop */}
+      <div className="mt-8">
+        <h2 className="font-bold text-3xl">SHOP</h2>
+        <Dialog>
+          <DialogTrigger>
+            <Button className="text-gray-700 mt-4">Add Item</Button>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Add an item to your shop</DialogTitle>
+            </DialogHeader>
+            <div>
+              <form
+                onSubmit={handleShopItemSubmit}
+                className="flex flex-col gap-4"
+              >
+                <input
+                  type="text"
+                  placeholder="Item Title"
+                  id="title"
+                  className="bg-slate-100 rounded-md p-2 text-xs text-black"
+                  onChange={handleShopChange}
+                />
+                <input
+                  type="Number"
+                  placeholder="Price"
+                  id="price"
+                  className="bg-slate-100 rounded-md p-2 text-xs text-black"
+                  onChange={handleShopChange}
+                />
+                <textarea
+                  name="description"
+                  cols="30"
+                  rows="10"
+                  type="text"
+                  placeholder="description"
+                  id="description"
+                  className="bg-slate-100 rounded-md p-2 text-xs text-black"
+                  onChange={handleShopChange}
+                ></textarea>
+
+                {/* <div className="form-group mb-3 flex flex-col space-y-1">
+                  <p className="textTitle">Image</p>
+                  {[1, 2, 3, 4].map((item, id) => (
+                    <input
+                      key={id}
+                      type="file"
+                      className="form-control"
+                      id="image"
+                      onChange={handleShopImagesChange}
+                    />
+                  ))}
+                </div> */}
+                <div className="form-group mb-3 flex flex-col space-y-1">
+                  <p className="textTitle">Images</p>
+                  <input
+                    type="file"
+                    multiple
+                    className="form-control"
+                    onChange={handleShopImagesChange}
+                  />
+                </div>
+
+                <button
+                  // disabled={loading}
+                  className="bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80"
+                >
+                  {/* {loading ? "Loading..." : "Save"} */}
+                  Save
+                </button>
+              </form>
+            </div>
+          </DialogContent>
+        </Dialog>
+
+        {/* display */}
+        <div className="flex flex-row space-x-12 mt-8">
+          {shop.map((item) => (
+            <div
+              onClick={() => {
+                // dispatch(setBlog(post));
+              }}
+              key={item.id}
+              className="bg-gray-100 rounded-lg shadow-md shadow-gray-600 text-center p-2 w-1/4 hover:scale-105 duration-200"
+            >
+              {/* <img src={item.images[0]} alt="" className="w-full rounded-lg" /> */}
+              <div className="">
+                <Slider {...settings}>
+                  {item.images.map((image) => (
+                    <img
+                      key={image}
+                      src={image}
+                      alt=""
+                      className=" w-12 h-10z"
+                    />
+                  ))}
+                </Slider>
+              </div>
+
+              <p className="text-gray-700 text-lg font-semibold mt-8">{item.title}</p>
+
+              <p className="text-gray-700 text-sm mt-2 w-3/4 mx-auto">
+                {item.description.slice(0, 50)}...
+              </p>
+
+              <Dialog>
+                <DialogTrigger>
+                  <Button className="bg-primary text-gray-800 mt-4">
+                    Delete
+                  </Button>
+                </DialogTrigger>
+                <DialogContent>
+                  <DialogHeader>
+                    <DialogTitle>
+                      You Sure want to delete this post?
+                    </DialogTitle>
+                  </DialogHeader>
+                  <DialogFooter className="w-full">
+                    <DialogClose asChild>
+                      <button
+                        // disabled={loading}
+                        className="bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80"
+                        onClick={() => handleDeleteShopItem(item)}
+                      >
+                        {/* {loading ? "Loading..." : "Save"} */}
+                        Yes
+                      </button>
+                    </DialogClose>
+                  </DialogFooter>
+                </DialogContent>
+              </Dialog>
+            </div>
+          ))}
+        </div>
+      </div>
+     
     </div>
   );
 };
