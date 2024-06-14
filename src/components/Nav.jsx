@@ -80,6 +80,7 @@ const Nav = () => {
   const [state, setState] = useState(false);
   const { currentUser } = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  
   const navigate = useNavigate();
 
   return (
